@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->bigInteger("id");
+            $table->bigIncrements("id");
             $table->string("title", 50)->unique();
             $table->string("description", 255)->nullable();
             $table->boolean("is_complete")->default(false);
