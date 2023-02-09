@@ -8,6 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * Function creates the default schema structure
      *
      * @return void
      */

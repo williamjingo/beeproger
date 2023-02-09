@@ -10,6 +10,7 @@ class TodoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * Function creates 50 todos seed
      *
      * @return void
      */
