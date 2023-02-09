@@ -17,7 +17,10 @@ class TodoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->unique()->text('50'),
+            'description' => $this->faker->text(255),
+            'is_complete' => $this->faker->boolean(),
+            'image_path' => $this->faker->imageUrl()
         ];
     }
 }
