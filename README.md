@@ -1,4 +1,4 @@
-<p align="center"><a href="https://beeproger.com" target="_blank"><img src="https://beeproger.com/app/themes/2021/public/images/beeproger_Logo.svg" width="400" alt="beep roger"></a></p>
+<p align="center"><a href="https://beeproger.com" target="_blank"><img src="https://media.licdn.com/dms/image/C4E0BAQFtygilGPMZ3Q/company-logo_200_200/0/1661769361303?e=2147483647&v=beta&t=jZGOUjxkqiGFr3OpfD40J31zr4Fxvhni9fdsUFXn9p4" width="150" alt="beep roger"></a></p>
 
 
 ## Beep roger interview Solution | Todo list application
