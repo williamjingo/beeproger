@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->bigInteger();
+            $table->bigInteger("id");
+            $table->string("title", 50)->unique();
+            $table->string("description", 255)->nullable();
+            $table->boolean("is_complete")->default(false);
+            $table->text("image_path")->nullable();
             $table->timestamps();
         });
     }
