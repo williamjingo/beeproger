@@ -6,9 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
 use App\Models\Todo;
+use App\Repository\TodoRepository;
 
 class TodoController extends Controller
 {
+
+    /**
+     * @var TodoRepository
+     */
+    private $todoRepository;
+
+    public function __construct(TodoRepository $todoRepository)
+    {
+        $this->todoRepository = $todoRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
