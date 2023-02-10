@@ -4,7 +4,9 @@
 namespace App\Repository;
 
 
+use App\Services\ImageService;
 use App\Models\Todo;
+use Illuminate\Support\Arr;
 
 class TodoRepository
 {
@@ -15,7 +17,7 @@ class TodoRepository
      */
     public function get_all()
     {
-        return Todo::paginate();
+        return Todo::orderBy('id', 'desc')->paginate();
     }
 
     /**
@@ -26,6 +28,16 @@ class TodoRepository
      */
     public function store(array $data): Todo
     {
+        if($data['image']) {
+
+            $file_chars = (new ImageService())->upload('image');
+
+            // merge image path and name to $data
+            $data = Arr::except([...$data, ...$file_chars], ['image']);
+        }
+
         return Todo::create($data);
     }
+
+
 }

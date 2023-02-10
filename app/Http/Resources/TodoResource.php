@@ -19,7 +19,15 @@ class TodoResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'is_complete' => $this->is_complete,
-            'image_path' => $this->whenNotNull($this->image)
+            'image' =>
+                $this->when(
+                    $this->image_name,
+                    [
+                        'path' => $this->image_path,
+                        'name' => $this->image_name
+                    ]
+                )
+
         ];
     }
 }

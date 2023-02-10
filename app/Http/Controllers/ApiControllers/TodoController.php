@@ -44,9 +44,7 @@ class TodoController extends Controller
         // get validated order data
         $data = $request->validated();
 
-        // save the image
-
-        // save todos data
+        // save
         $todo = $this->todoRepository->store($data);
 
         // return created todos

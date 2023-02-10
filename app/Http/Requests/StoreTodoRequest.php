@@ -27,6 +27,9 @@ class StoreTodoRequest extends FormRequest
             'title' => 'required|unique:todos|max:50',
             'description' => 'required|max:255',
             'is_complete' => 'boolean',
+            'image' => 'image|max:1024|mimes:jpg,png,jpeg'
         ];
     }
 }
+
+//jpg, jpeg, png
