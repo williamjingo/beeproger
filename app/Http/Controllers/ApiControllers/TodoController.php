@@ -5,8 +5,10 @@ namespace App\Http\Controllers\ApiControllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
+use App\Http\Resources\TodoResource;
 use App\Models\Todo;
 use App\Repository\TodoRepository;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class TodoController extends Controller
 {
@@ -24,11 +26,11 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
-    public function index()
+    public function index(): JsonResource
     {
-        //
+        return TodoResource::collection($this->todoRepository->get_all());
     }
 
     /**

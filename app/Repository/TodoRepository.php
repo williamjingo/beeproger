@@ -5,16 +5,15 @@ namespace App\Repository;
 
 
 use App\Models\Todo;
-use Illuminate\Pagination\Paginator;
 
 class TodoRepository
 {
     /**
      * Functions retrieves Todos.
      *
-     * @return Paginator
+     * @return mixed
      */
-    public function get_all(): Paginator
+    public function get_all()
     {
         return Todo::paginate();
     }
