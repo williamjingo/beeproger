@@ -16,7 +16,7 @@ class TodoController extends Controller
     /**
      * @var TodoRepository
      */
-    private $todoRepository;
+    private TodoRepository $todoRepository;
 
     public function __construct(TodoRepository $todoRepository)
     {

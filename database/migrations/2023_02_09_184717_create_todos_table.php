@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("title", 50)->unique();
             $table->string("description", 255)->nullable();
             $table->boolean("is_complete")->default(false);
-            $table->text("image_path")->nullable();
+            $table->text("image")->nullable();
             $table->timestamps();
         });
     }
