@@ -17,4 +17,15 @@ class TodoRepository
     {
         return Todo::paginate();
     }
+
+    /**
+     * Function creates a App\Models\Todo in the database
+     *
+     * @param array $data
+     * @return Todo
+     */
+    public function store(array $data): Todo
+    {
+        return Todo::create($data);
+    }
 }

@@ -13,6 +13,8 @@ class Todo extends Model
         'title', 'description', 'is_complete', 'image'
     ];
 
+    protected $attributes = ['is_complete' => false];
+
     protected $casts = [
         'is_complete' => 'boolean'
     ];
