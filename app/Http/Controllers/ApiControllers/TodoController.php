@@ -41,7 +41,7 @@ class TodoController extends Controller
      */
     public function store(StoreTodoRequest $request)
     {
-        // get validated order data
+        // get validated request params
         $data = $request->validated();
 
         // save
@@ -63,26 +63,22 @@ class TodoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource.
      *
+     * @param UpdateTodoRequest $request
      * @param Todo $todo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Todo $todo)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTodoRequest  $request
-     * @param Todo $todo
-     * @return \Illuminate\Http\Response
+     * @return TodoResource
      */
     public function update(UpdateTodoRequest $request, Todo $todo)
     {
-        //
+        // get validated request params
+        $data = $request->validated();
+
+        // update
+        $todo = $this->todoRepository->update($todo, $data);
+
+        // return updated resource
+        return new TodoResource($todo);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class TodoResource extends JsonResource
 {
@@ -23,7 +24,7 @@ class TodoResource extends JsonResource
                 $this->when(
                     $this->image_name,
                     [
-                        'path' => $this->image_path,
+                        'path' => env('APP_URL').Storage::url($this->image_path),
                         'name' => $this->image_name
                     ]
                 )
