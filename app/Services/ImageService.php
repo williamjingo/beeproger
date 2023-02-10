@@ -30,4 +30,14 @@ class ImageService
 
         return ['image_path' => $file_path, 'image_name' => $file_name];
     }
+
+    /**
+     * Function drop image from path
+     *
+     * @param string $file_path
+     */
+    public function drop_file(string $file_path)
+    {
+        if($file_path && Storage::exists($file_path)) Storage::delete($file_path);
+    }
 }

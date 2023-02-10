@@ -57,10 +57,22 @@ class TodoRepository
             $data = Arr::except([...$data, ...$file_chars], ['image']);
 
             // drop image at path if exists
-            if($todo->image_path && Storage::exists($todo->image_path)) Storage::delete($todo->image_path);
+            $imageService->drop_file($todo->image_path);
         }
 
         return tap($todo)->update($data);
     }
+
+    /**
+     * Function delete resource from database
+     * @param Todo $todo
+     * @return Todo
+     */
+    public function destroy(Todo $todo)
+    {
+        // drop associated image
+        (new ImageService())->drop_file($todo->image_path || "");
+
+        return tap($todo)->delete();
+    }
 }
-//8chyoBcIm0DI2EOHqi2fIkz9tnWB4x78STCnxoSL.png
