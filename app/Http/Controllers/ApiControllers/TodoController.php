@@ -24,7 +24,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Returns a listing of the Todos.
      *
      * @return JsonResource
      */
@@ -55,20 +55,20 @@ class TodoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Retrieves the specified resource.
      *
-     * @param  \App\Models\Todo  $todo
-     * @return \Illuminate\Http\Response
+     * @param Todo $todo
+     * @return TodoResource
      */
-    public function show(Todo $todo)
+    public function show(Todo $todo): TodoResource
     {
-        //
+        return new TodoResource($todo);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Todo  $todo
+     * @param Todo $todo
      * @return \Illuminate\Http\Response
      */
     public function edit(Todo $todo)
@@ -80,7 +80,7 @@ class TodoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateTodoRequest  $request
-     * @param  \App\Models\Todo  $todo
+     * @param Todo $todo
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateTodoRequest $request, Todo $todo)
@@ -91,7 +91,7 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Todo  $todo
+     * @param Todo $todo
      * @return \Illuminate\Http\Response
      */
     public function destroy(Todo $todo)
