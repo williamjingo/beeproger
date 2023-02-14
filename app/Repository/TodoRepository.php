@@ -18,7 +18,7 @@ class TodoRepository
      */
     public function get_all()
     {
-        return Todo::latest()->paginate();
+        return Todo::latest()->paginate(10);
     }
 
     /**

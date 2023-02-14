@@ -5,12 +5,8 @@ const apiEndPoint = "/api/todos";
  * @param {*} page
  * @returns
  */
-export function getTodos(page = null) {
-    if (page) {
-        // return page todos
-    }
-
-    return axios.get(apiEndPoint);
+export function getTodos(page = 1) {
+    return axios.get(`${apiEndPoint}?page=${page}`);
 }
 
 /**

@@ -7427,7 +7427,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _components_Pagination__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Pagination */ "./resources/js/components/Pagination.jsx");
+/* harmony import */ var _components_pagination_pagination_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/pagination/pagination.component */ "./resources/js/components/pagination/pagination.component.jsx");
 /* harmony import */ var _components_default_layout_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/default-layout.component */ "./resources/js/components/default-layout.component.jsx");
 /* harmony import */ var _services_todoService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/todoService */ "./resources/js/services/todoService.js");
 /* harmony import */ var _components_todos_todo_item_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/todos/todo-item.component */ "./resources/js/components/todos/todo-item.component.jsx");
@@ -7474,6 +7474,10 @@ var TodoIndex = function TodoIndex() {
     _useState2 = _slicedToArray(_useState, 2),
     todos = _useState2[0],
     setTodos = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState4 = _slicedToArray(_useState3, 2),
+    paginationObj = _useState4[0],
+    setPaginationObj = _useState4[1];
 
   /**
    * Function retrieves to
@@ -7494,7 +7498,8 @@ var TodoIndex = function TodoIndex() {
             _yield$todoService$ge = _context.sent;
             data = _yield$todoService$ge.data;
             setTodos(data.data);
-          case 6:
+            setPaginationObj(data);
+          case 7:
           case "end":
             return _context.stop();
         }
@@ -7502,6 +7507,28 @@ var TodoIndex = function TodoIndex() {
     }));
     return function getTodos() {
       return _ref.apply(this, arguments);
+    };
+  }();
+
+  /**
+   * Function handles change in pages
+   * @param {*} page
+   */
+  var handlePageChange = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(page) {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return getTodos(page);
+          case 2:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    }));
+    return function handlePageChange(_x2) {
+      return _ref2.apply(this, arguments);
     };
   }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -7513,12 +7540,12 @@ var TodoIndex = function TodoIndex() {
    * @param {*} todo
    */
   var handleOnDelete = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(todo) {
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-        while (1) switch (_context2.prev = _context2.next) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(todo) {
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
           case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
+            _context3.prev = 0;
+            _context3.next = 3;
             return _services_todoService__WEBPACK_IMPORTED_MODULE_3__["default"].deleteTodo(todo);
           case 3:
             // filter deleted todo from state
@@ -7527,33 +7554,33 @@ var TodoIndex = function TodoIndex() {
                 if (obj.id != todo.id) return obj;
               });
             });
-            _context2.next = 9;
+            _context3.next = 9;
             break;
           case 6:
-            _context2.prev = 6;
-            _context2.t0 = _context2["catch"](0);
+            _context3.prev = 6;
+            _context3.t0 = _context3["catch"](0);
             console.log("error deleting todo");
           case 9:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
-      }, _callee2, null, [[0, 6]]);
+      }, _callee3, null, [[0, 6]]);
     }));
-    return function handleOnDelete(_x2) {
-      return _ref2.apply(this, arguments);
+    return function handleOnDelete(_x3) {
+      return _ref3.apply(this, arguments);
     };
   }();
   var handleOnComplete = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(todo) {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(todo) {
       var updatedTodo;
-      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-        while (1) switch (_context3.prev = _context3.next) {
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
           case 0:
-            _context3.prev = 0;
+            _context4.prev = 0;
             updatedTodo = _objectSpread(_objectSpread({}, todo), {}, {
               is_complete: !todo.is_complete
             }); // trigger todo api update request
-            _context3.next = 4;
+            _context4.next = 4;
             return _services_todoService__WEBPACK_IMPORTED_MODULE_3__["default"].updateTodo(updatedTodo);
           case 4:
             // update state
@@ -7563,20 +7590,20 @@ var TodoIndex = function TodoIndex() {
                 return obj;
               });
             });
-            _context3.next = 10;
+            _context4.next = 10;
             break;
           case 7:
-            _context3.prev = 7;
-            _context3.t0 = _context3["catch"](0);
-            console.log(_context3.t0);
+            _context4.prev = 7;
+            _context4.t0 = _context4["catch"](0);
+            console.log(_context4.t0);
           case 10:
           case "end":
-            return _context3.stop();
+            return _context4.stop();
         }
-      }, _callee3, null, [[0, 7]]);
+      }, _callee4, null, [[0, 7]]);
     }));
-    return function handleOnComplete(_x3) {
-      return _ref3.apply(this, arguments);
+    return function handleOnComplete(_x4) {
+      return _ref4.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_default_layout_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -7591,7 +7618,10 @@ var TodoIndex = function TodoIndex() {
             onComplete: handleOnComplete
           }, todo.id);
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Pagination__WEBPACK_IMPORTED_MODULE_1__["default"], {})]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_pagination_pagination_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        data: paginationObj,
+        onPageChange: handlePageChange
+      })]
     })
   });
 };
@@ -7752,71 +7782,6 @@ var Main = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Pagination.jsx":
-/*!************************************************!*\
-  !*** ./resources/js/components/Pagination.jsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-var Pagination = function Pagination() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("nav", {
-    "aria-label": "Page navigation example",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
-      className: "pagination justify-content-center",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "page-item disabled",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-          className: "page-link",
-          children: "Previous"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "page-item",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-          className: "page-link",
-          href: "#",
-          children: "1"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "page-item",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-          className: "page-link",
-          href: "#",
-          children: "2"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "page-item",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-          className: "page-link",
-          href: "#",
-          children: "3"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "page-item",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-          className: "page-link",
-          href: "#",
-          children: "Next"
-        })
-      })]
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Pagination);
-
-/***/ }),
-
 /***/ "./resources/js/components/button.component.jsx":
 /*!******************************************************!*\
   !*** ./resources/js/components/button.component.jsx ***!
@@ -7928,6 +7893,105 @@ var DefaultLayout = function DefaultLayout(_ref) {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DefaultLayout);
+
+/***/ }),
+
+/***/ "./resources/js/components/pagination/pagination-item.component.jsx":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/pagination/pagination-item.component.jsx ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var PaginationItem = function PaginationItem(_ref) {
+  var currentPage = _ref.currentPage,
+    page = _ref.page,
+    onPageChange = _ref.onPageChange;
+  var linkClasses = "page-link";
+  if (page === currentPage) linkClasses += " active";
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+    className: "page-item",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: "/",
+      className: linkClasses,
+      onClick: function onClick(e) {
+        e.preventDefault();
+        if (currentPage !== page) onPageChange(page);
+      },
+      children: page
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PaginationItem);
+
+/***/ }),
+
+/***/ "./resources/js/components/pagination/pagination.component.jsx":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/pagination/pagination.component.jsx ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _pagination_item_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pagination-item.component */ "./resources/js/components/pagination/pagination-item.component.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var Pagination = function Pagination(_ref) {
+  var _ref$data = _ref.data,
+    data = _ref$data === void 0 ? {} : _ref$data,
+    onPageChange = _ref.onPageChange;
+  // check if data
+  if (Object.keys(data).length <= 1) return null;
+
+  // hide pagination if there are no todo lists
+  if (data.data.length === 0) return null;
+  var _data$meta = data.meta,
+    current_page = _data$meta.current_page,
+    last_page = _data$meta.last_page,
+    total = _data$meta.total,
+    per_page = _data$meta.per_page;
+
+  // round up to eliminates decimal points
+  var pagesCount = Math.ceil(total / per_page);
+  if (pagesCount === 1) return null;
+  var pages = lodash__WEBPACK_IMPORTED_MODULE_1___default().range(1, pagesCount + 1);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("nav", {
+    "aria-label": "Page navigation example",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+      className: "pagination justify-content-center",
+      children: pages && pages.map(function (page) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_pagination_item_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          page: page,
+          currentPage: current_page,
+          onPageChange: onPageChange
+        }, page);
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Pagination);
 
 /***/ }),
 
@@ -8056,11 +8120,8 @@ var apiEndPoint = "/api/todos";
  * @returns
  */
 function getTodos() {
-  var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  if (page) {
-    // return page todos
-  }
-  return axios.get(apiEndPoint);
+  var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  return axios.get("".concat(apiEndPoint, "?page=").concat(page));
 }
 
 /**

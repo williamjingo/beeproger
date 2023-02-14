@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
-import Pagination from "../../components/Pagination";
+import Pagination from "../../components/pagination/pagination.component";
 import DefaultLayout from "../../components/default-layout.component";
 import todoService from "../../services/todoService";
 import TodoItem from "../../components/todos/todo-item.component";
@@ -20,6 +20,7 @@ const renderPageTitle = () => {
 
 const TodoIndex = () => {
     const [todos, setTodos] = useState([]);
+    const [paginationObj, setPaginationObj] = useState({});
 
     /**
      * Function retrieves to
@@ -27,6 +28,15 @@ const TodoIndex = () => {
     const getTodos = async (page = null) => {
         const { data } = await todoService.getTodos(page);
         setTodos(data.data);
+        setPaginationObj(data);
+    };
+
+    /**
+     * Function handles change in pages
+     * @param {*} page
+     */
+    const handlePageChange = async (page) => {
+        await getTodos(page);
     };
 
     useEffect(() => {
@@ -87,7 +97,10 @@ const TodoIndex = () => {
                         ))}
                 </ul>
 
-                <Pagination />
+                <Pagination
+                    data={paginationObj}
+                    onPageChange={handlePageChange}
+                />
             </>
         </DefaultLayout>
     );
