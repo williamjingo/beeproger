@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Button from "../../components/button.component";
 
 const EditTodo = () => {
     return (
@@ -12,9 +12,7 @@ const EditTodo = () => {
                         </h5>
                         <div className="card-body">
                             <p>Update Todo</p>
-                            <Link to="/" className="btn btn-dark btn-sm me-1">
-                                Back
-                            </Link>
+                            <Button type="back" />
                         </div>
                     </div>
                 </div>
