@@ -7896,6 +7896,61 @@ var DefaultLayout = function DefaultLayout(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/components/pagination/pagination-item-icon-link.component.jsx":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/pagination/pagination-item-icon-link.component.jsx ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var PaginationItemIconLink = function PaginationItemIconLink(_ref) {
+  var label = _ref.label,
+    page = _ref.page,
+    currentPage = _ref.currentPage,
+    lastPage = _ref.lastPage,
+    onPageChange = _ref.onPageChange;
+  var link_classes = function link_classes() {
+    var css_classes = "page-item";
+    if (label === "Previous" && currentPage === 1) {
+      css_classes += " disabled";
+    } else if (label === "Next" && currentPage === lastPage) {
+      css_classes += " disabled";
+    }
+    return css_classes;
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+    className: link_classes(),
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: "/",
+      className: "page-link",
+      role: "button",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        if (label.toLowerCase() === "next") {
+          onPageChange(page + 1);
+        } else {
+          onPageChange(page - 1);
+        }
+      },
+      children: label
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PaginationItemIconLink);
+
+/***/ }),
+
 /***/ "./resources/js/components/pagination/pagination-item.component.jsx":
 /*!**************************************************************************!*\
   !*** ./resources/js/components/pagination/pagination-item.component.jsx ***!
@@ -7953,7 +8008,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _pagination_item_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pagination-item.component */ "./resources/js/components/pagination/pagination-item.component.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _pagination_item_icon_link_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pagination-item-icon-link.component */ "./resources/js/components/pagination/pagination-item-icon-link.component.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
@@ -7977,17 +8035,29 @@ var Pagination = function Pagination(_ref) {
   var pagesCount = Math.ceil(total / per_page);
   if (pagesCount === 1) return null;
   var pages = lodash__WEBPACK_IMPORTED_MODULE_1___default().range(1, pagesCount + 1);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("nav", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("nav", {
     "aria-label": "Page navigation example",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ul", {
       className: "pagination justify-content-center",
-      children: pages && pages.map(function (page) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_pagination_item_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_pagination_item_icon_link_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        label: "Previous",
+        page: current_page,
+        currentPage: current_page,
+        lastPage: last_page,
+        onPageChange: onPageChange
+      }), pages && pages.map(function (page) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_pagination_item_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
           page: page,
           currentPage: current_page,
           onPageChange: onPageChange
         }, page);
-      })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_pagination_item_icon_link_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        label: "Next",
+        page: current_page,
+        currentPage: current_page,
+        lastPage: last_page,
+        onPageChange: onPageChange
+      })]
     })
   });
 };

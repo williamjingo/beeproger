@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import PaginationItem from "./pagination-item.component";
+import PaginationItemIconLink from "./pagination-item-icon-link.component";
 
 const Pagination = ({ data = {}, onPageChange }) => {
     // check if data
@@ -21,6 +22,14 @@ const Pagination = ({ data = {}, onPageChange }) => {
     return (
         <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
+                <PaginationItemIconLink
+                    label="Previous"
+                    page={current_page}
+                    currentPage={current_page}
+                    lastPage={last_page}
+                    onPageChange={onPageChange}
+                />
+
                 {pages &&
                     pages.map((page) => (
                         <PaginationItem
@@ -30,6 +39,14 @@ const Pagination = ({ data = {}, onPageChange }) => {
                             onPageChange={onPageChange}
                         />
                     ))}
+
+                <PaginationItemIconLink
+                    label="Next"
+                    page={current_page}
+                    currentPage={current_page}
+                    lastPage={last_page}
+                    onPageChange={onPageChange}
+                />
             </ul>
         </nav>
     );
