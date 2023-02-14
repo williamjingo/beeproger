@@ -2,9 +2,17 @@ import React from "react";
 import Button from "../../components/button.component";
 import DefaultLayout from "../../components/default-layout.component";
 
+const renderPageTitle = () => {
+    return (
+        <>
+            <i className="bi bi-file-plus" /> Create Todo
+        </>
+    );
+};
+
 const CreateTodo = () => {
     return (
-        <DefaultLayout>
+        <DefaultLayout title={renderPageTitle()}>
             <>
                 <div className="mb-3">
                     <input

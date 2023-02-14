@@ -18,7 +18,7 @@ class TodoRepository
      */
     public function get_all()
     {
-        return Todo::orderBy('id', 'desc')->paginate();
+        return Todo::latest()->paginate();
     }
 
     /**
@@ -29,7 +29,7 @@ class TodoRepository
      */
     public function store(array $data): Todo
     {
-        if($data['image']) {
+        if ($data['image']) {
 
             $file_chars = (new ImageService())->upload('image');
 
@@ -46,9 +46,9 @@ class TodoRepository
      * @param array $data
      * @return Todo
      */
-    public function update(Todo $todo ,array $data): Todo
+    public function update(Todo $todo, array $data): Todo
     {
-        if($data['image']) {
+        if (Arr::exists($data, 'image')) {
             $imageService = new ImageService();
 
             $file_chars = $imageService->upload('image');
