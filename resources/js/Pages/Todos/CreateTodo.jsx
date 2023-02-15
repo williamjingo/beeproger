@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Joi from "joi";
 
+import todoService from "../../services/todoService";
+import { validateProperty, validate } from "../../services/validationServices";
+
 import Button from "../../components/button.component";
 import DefaultLayout from "../../components/default-layout.component";
-import FormAlertMessage from "../../components/alerts/form-alert-message.component";
-import todoService from "../../services/todoService";
 import Notice from "../../components/alerts/notice.component";
 import TextInput from "../../components/form/text-input.component";
 import TextareaInput from "../../components/form/textarea-input.component";
@@ -39,15 +40,6 @@ const CreateTodo = () => {
         image: Joi.any().label("Image"),
     });
 
-    // validate property
-    const validateProperty = ({ name, value }) => {
-        const obj = { [name]: value };
-
-        const schema = Joi.object({ [name]: validate_schema.extract(name) });
-        const { error } = schema.validate(obj);
-        return error ? error.details[0].message : null;
-    };
-
     // handle form errors
     const handOnInputChange = ({
         target,
@@ -62,7 +54,7 @@ const CreateTodo = () => {
             data[name] = value;
         }
 
-        const errorMessage = validateProperty({ name, value });
+        const errorMessage = validateProperty({ name, value, validate_schema });
         const errors = { ...formErrors };
         if (errorMessage) errors[name] = errorMessage;
         else delete errors[name];
@@ -71,21 +63,10 @@ const CreateTodo = () => {
         setTodo(data);
     };
 
-    // form validation
-    const validate = (data) => {
-        const options = { abortEarly: false };
-        const { error } = validate_schema.validate(data, options);
-        if (!error) return null;
-
-        const errors = {};
-        for (let item of error.details) errors[item.path[0]] = item.message;
-        return errors;
-    };
-
     // handle on submit
     const handleOnSubmit = async () => {
         try {
-            const errors = validate(todo);
+            const errors = validate(todo, validate_schema);
 
             if (errors && Object.keys(errors).length > 0) {
                 setFormErrors(errors);
