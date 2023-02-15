@@ -10,6 +10,15 @@ export function getTodos(page = 1) {
 }
 
 /**
+ * Queries backend todo by id
+ * @param {*} page
+ * @returns
+ */
+export function getTodo(Id) {
+    return axios.get(`${apiEndPoint}/${Id}`);
+}
+
+/**
  * Function makes request to backend to delete Todo
  *
  * @param {*} param0
@@ -53,6 +62,7 @@ export function storeTodo(todo) {
 
 export default {
     getTodos,
+    getTodo,
     updateTodo,
     deleteTodo,
     storeTodo,

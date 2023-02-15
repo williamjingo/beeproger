@@ -26,7 +26,7 @@ const renderBackButton = (type) => {
  * @param {*} param0
  * @returns
  */
-const Button = ({ type, disabled = false, onSubmit }) => {
+const Button = ({ label = "Submit", type, disabled = false, onSubmit }) => {
     if (!type) return null;
 
     // capitalize type
@@ -43,7 +43,7 @@ const Button = ({ type, disabled = false, onSubmit }) => {
             disabled={disabled}
             onClick={() => onSubmit()}
         >
-            Submit
+            {label}
         </button>
     );
 };

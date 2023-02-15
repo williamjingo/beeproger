@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
+import todoService from "../../services/todoService";
+
 import Pagination from "../../components/pagination/pagination.component";
 import DefaultLayout from "../../components/default-layout.component";
-import todoService from "../../services/todoService";
 import TodoItem from "../../components/todos/todo-item.component";
 
 const renderPageTitle = () => {

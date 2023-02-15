@@ -6,6 +6,9 @@ import DefaultLayout from "../../components/default-layout.component";
 import FormAlertMessage from "../../components/alerts/form-alert-message.component";
 import todoService from "../../services/todoService";
 import Notice from "../../components/alerts/notice.component";
+import TextInput from "../../components/form/text-input.component";
+import TextareaInput from "../../components/form/textarea-input.component";
+import FileInput from "../../components/form/file-input.component";
 
 const renderPageTitle = () => {
     return (
@@ -108,41 +111,27 @@ const CreateTodo = () => {
                 {notice && <Notice {...notice} />}
 
                 <div className="mb-3">
-                    <input
-                        className="form-control form-control-lg"
-                        type="text"
+                    <TextInput
                         name="title"
-                        placeholder="Title ..."
                         value={todo.title}
+                        error={formErrors.title}
                         onChange={handOnInputChange}
                     />
-
-                    <FormAlertMessage type="error" message={formErrors.title} />
                 </div>
                 <div className="mb-3">
-                    <textarea
-                        className="form-control form-control-lg"
-                        rows="3"
+                    <TextareaInput
                         name="description"
-                        placeholder="Description"
                         value={todo.description}
+                        error={formErrors.description}
                         onChange={handOnInputChange}
-                    />
-
-                    <FormAlertMessage
-                        type="error"
-                        message={formErrors.description}
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">Attach an image</label>
-                    <input
-                        className="form-control form-control-lg"
-                        type="file"
+                    <FileInput
                         name="image"
+                        error={formErrors.image}
                         onChange={handOnInputChange}
                     />
-                    <FormAlertMessage type="error" message={formErrors.image} />
                 </div>
 
                 <div className="btn-group" role="group">
