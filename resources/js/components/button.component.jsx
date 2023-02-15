@@ -26,7 +26,7 @@ const renderBackButton = (type) => {
  * @param {*} param0
  * @returns
  */
-const Button = ({ type }) => {
+const Button = ({ type, onSubmit }) => {
     if (!type) return null;
 
     // capitalize type
@@ -37,7 +37,7 @@ const Button = ({ type }) => {
 
     // submit button
     return (
-        <button type="button" className="btn btn-primary">
+        <button type="button" className="btn btn-primary" onClick={onSubmit}>
             Submit
         </button>
     );
