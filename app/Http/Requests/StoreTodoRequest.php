@@ -26,7 +26,6 @@ class StoreTodoRequest extends FormRequest
         return [
             'title' => 'required|min:2|max:50',
             'description' => 'max:255',
-            'is_complete' => 'required|boolean',
             'image' => 'image|max:1024|mimes:jpg,png,jpeg'
         ];
     }

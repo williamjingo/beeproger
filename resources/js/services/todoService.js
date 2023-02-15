@@ -28,8 +28,32 @@ export function updateTodo(todo) {
     return axios.put(`${apiEndPoint}/${todo.id}`, { ...todo });
 }
 
+/**
+ * Function requests Api to store new todo
+ * @param {*} todo
+ * @returns
+ */
+export function storeTodo(todo) {
+    const formData = new FormData();
+
+    // append to form data
+    Object.keys(todo).forEach((key) => {
+        if (todo[key]) formData.append(key, todo[key]);
+    });
+
+    // set axios multipart/form-data to support image upload
+    const config = {
+        headers: {
+            "content-type": "multipart/form-data",
+        },
+    };
+
+    return axios.post(apiEndPoint, formData, config);
+}
+
 export default {
     getTodos,
     updateTodo,
     deleteTodo,
+    storeTodo,
 };

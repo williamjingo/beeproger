@@ -29,7 +29,7 @@ class TodoRepository
      */
     public function store(array $data): Todo
     {
-        if ($data['image']) {
+        if (Arr::exists($data, 'image')) {
 
             $file_chars = (new ImageService())->upload('image');
 
