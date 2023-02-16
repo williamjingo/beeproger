@@ -82,7 +82,21 @@ const CreateTodo = () => {
             setTodo({ ...DEFAULT_TODO });
         } catch (error) {
             setLoading(false);
-            console.log(error);
+
+            const { status, data } = error.response;
+
+            if (status !== 422) {
+                setNotice({
+                    type: "danger",
+                    message:
+                        "Oops! we are having trouble creating your Todo, Please try again later",
+                });
+
+                return;
+            }
+
+            const { errors } = data;
+            setFormErrors(errors);
         }
     };
 

@@ -22,6 +22,7 @@ const renderPageTitle = () => {
 const TodoIndex = () => {
     const [todos, setTodos] = useState([]);
     const [paginationObj, setPaginationObj] = useState({});
+    const [notice, setNotice] = useState(null);
 
     /**
      * Function retrieves to
@@ -60,7 +61,7 @@ const TodoIndex = () => {
                 })
             );
         } catch (error) {
-            console.log("error deleting todo");
+            handleError(error);
         }
     };
 
@@ -79,12 +80,26 @@ const TodoIndex = () => {
                 })
             );
         } catch (error) {
-            console.log(error);
+            handleError(error);
+        }
+    };
+
+    const handleError = ({ response }) => {
+        const { status } = response;
+
+        if (status !== 422) {
+            setNotice({
+                type: "danger",
+                message:
+                    "Error! we are having trouble proccessing this request, Please try again later",
+            });
+
+            return;
         }
     };
 
     return (
-        <DefaultLayout title={renderPageTitle()}>
+        <DefaultLayout title={renderPageTitle()} notice={notice || null}>
             <>
                 <ul className="list-group list-group-flush border-bottom mb-5 py-2">
                     {todos &&

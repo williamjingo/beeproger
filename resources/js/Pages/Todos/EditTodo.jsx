@@ -7,7 +7,6 @@ import { validateProperty, validate } from "../../services/validationServices";
 
 import Button from "../../components/button.component";
 import DefaultLayout from "../../components/default-layout.component";
-import Notice from "../../components/alerts/notice.component";
 import TextInput from "../../components/form/text-input.component";
 import TextareaInput from "../../components/form/textarea-input.component";
 import FileInput from "../../components/form/file-input.component";
@@ -45,7 +44,7 @@ const EditTodo = () => {
         getTodo(id);
     }, [id]);
 
-    if (!todo) return;
+    if (!todo) return null;
 
     // handle form errors
     const handOnInputChange = ({
@@ -112,10 +111,8 @@ const EditTodo = () => {
     };
 
     return (
-        <DefaultLayout title={renderPageTitle()}>
+        <DefaultLayout title={renderPageTitle()} notice={notice || null}>
             <>
-                {notice && <Notice {...notice} />}
-
                 <div className="mb-3">
                     <TextInput
                         name="title"

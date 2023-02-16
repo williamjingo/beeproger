@@ -38,8 +38,6 @@ export function deleteTodo({ id }) {
 export function updateTodo(todo) {
     const formData = new FormData();
 
-    console.log(todo);
-
     // append to form data
     Object.keys(todo).forEach((key) => {
         // if image is not change remove

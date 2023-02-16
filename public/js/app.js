@@ -7397,7 +7397,7 @@ var CreateTodo = function CreateTodo() {
   // handle on submit
   var handleOnSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var errors;
+      var errors, _error$response, status, data, _errors;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -7420,14 +7420,26 @@ var CreateTodo = function CreateTodo() {
             });
             setLoading(false);
             setTodo(_objectSpread({}, DEFAULT_TODO));
-            _context.next = 17;
+            _context.next = 22;
             break;
           case 13:
             _context.prev = 13;
             _context.t0 = _context["catch"](0);
             setLoading(false);
-            console.log(_context.t0);
-          case 17:
+            _error$response = _context.t0.response, status = _error$response.status, data = _error$response.data;
+            if (!(status !== 422)) {
+              _context.next = 20;
+              break;
+            }
+            setNotice({
+              type: "danger",
+              message: "Oops! we are having trouble creating your Todo, Please try again later"
+            });
+            return _context.abrupt("return");
+          case 20:
+            _errors = data.errors;
+            setFormErrors(_errors);
+          case 22:
           case "end":
             return _context.stop();
         }
@@ -7494,18 +7506,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var joi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! joi */ "./node_modules/joi/dist/joi-browser.min.js");
 /* harmony import */ var joi__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(joi__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _services_todoService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/todoService */ "./resources/js/services/todoService.js");
 /* harmony import */ var _services_validationServices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/validationServices */ "./resources/js/services/validationServices.js");
 /* harmony import */ var _components_button_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/button.component */ "./resources/js/components/button.component.jsx");
 /* harmony import */ var _components_default_layout_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/default-layout.component */ "./resources/js/components/default-layout.component.jsx");
-/* harmony import */ var _components_alerts_notice_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/alerts/notice.component */ "./resources/js/components/alerts/notice.component.jsx");
-/* harmony import */ var _components_form_text_input_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/form/text-input.component */ "./resources/js/components/form/text-input.component.jsx");
-/* harmony import */ var _components_form_textarea_input_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/form/textarea-input.component */ "./resources/js/components/form/textarea-input.component.jsx");
-/* harmony import */ var _components_form_file_input_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/form/file-input.component */ "./resources/js/components/form/file-input.component.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_form_text_input_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/form/text-input.component */ "./resources/js/components/form/text-input.component.jsx");
+/* harmony import */ var _components_form_textarea_input_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/form/textarea-input.component */ "./resources/js/components/form/textarea-input.component.jsx");
+/* harmony import */ var _components_form_file_input_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/form/file-input.component */ "./resources/js/components/form/file-input.component.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -7534,9 +7545,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var renderPageTitle = function renderPageTitle() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
     children: "Update Todo"
   });
 };
@@ -7568,7 +7578,7 @@ var EditTodo = function EditTodo() {
   });
 
   // Navigation
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_10__.useParams)(),
     id = _useParams.id;
 
   // query server for todo
@@ -7597,7 +7607,7 @@ var EditTodo = function EditTodo() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getTodo(id);
   }, [id]);
-  if (!todo) return;
+  if (!todo) return null;
 
   // handle form errors
   var handOnInputChange = function handOnInputChange(_ref2) {
@@ -7680,39 +7690,40 @@ var EditTodo = function EditTodo() {
       return _ref3.apply(this, arguments);
     };
   }();
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_default_layout_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_default_layout_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     title: renderPageTitle(),
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
-      children: [notice && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_alerts_notice_component__WEBPACK_IMPORTED_MODULE_6__["default"], _objectSpread({}, notice)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+    notice: notice || null,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
         className: "mb-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_form_text_input_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_form_text_input_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "title",
           value: todo.title,
           error: formErrors.title,
           onChange: handOnInputChange
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
         className: "mb-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_form_textarea_input_component__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_form_textarea_input_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
           name: "description",
           value: todo.description,
           error: formErrors.description,
           onChange: handOnInputChange
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
         className: "mb-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_form_file_input_component__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_form_file_input_component__WEBPACK_IMPORTED_MODULE_8__["default"], {
           name: "image",
           imageObj: todo.image,
           error: formErrors.image,
           onChange: handOnInputChange
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
         className: "btn-group",
         role: "group",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
           type: "back"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
           type: "submit",
           label: "Update Todo",
           onSubmit: handleOnSubmit,
@@ -7826,6 +7837,10 @@ var TodoIndex = function TodoIndex() {
     _useState4 = _slicedToArray(_useState3, 2),
     paginationObj = _useState4[0],
     setPaginationObj = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    notice = _useState6[0],
+    setNotice = _useState6[1];
 
   /**
    * Function retrieves to
@@ -7907,7 +7922,7 @@ var TodoIndex = function TodoIndex() {
           case 6:
             _context3.prev = 6;
             _context3.t0 = _context3["catch"](0);
-            console.log("error deleting todo");
+            handleError(_context3.t0);
           case 9:
           case "end":
             return _context3.stop();
@@ -7943,7 +7958,7 @@ var TodoIndex = function TodoIndex() {
           case 7:
             _context4.prev = 7;
             _context4.t0 = _context4["catch"](0);
-            console.log(_context4.t0);
+            handleError(_context4.t0);
           case 10:
           case "end":
             return _context4.stop();
@@ -7954,8 +7969,20 @@ var TodoIndex = function TodoIndex() {
       return _ref4.apply(this, arguments);
     };
   }();
+  var handleError = function handleError(_ref5) {
+    var response = _ref5.response;
+    var status = response.status;
+    if (status !== 422) {
+      setNotice({
+        type: "danger",
+        message: "Error! we are having trouble proccessing this request, Please try again later"
+      });
+      return;
+    }
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_default_layout_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     title: renderPageTitle(),
+    notice: notice || null,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
         className: "list-group list-group-flush border-bottom mb-5 py-2",
@@ -8294,27 +8321,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _alerts_notice_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./alerts/notice.component */ "./resources/js/components/alerts/notice.component.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
 var DefaultLayout = function DefaultLayout(_ref) {
   var title = _ref.title,
+    _ref$notice = _ref.notice,
+    notice = _ref$notice === void 0 ? null : _ref$notice,
     children = _ref.children;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "container py-5",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "row",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "col-10 offset-1",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "card",
-          children: [title && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+          children: [title && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
             className: "card-header",
             children: title
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "card-body",
-            children: children
+            children: [notice && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_alerts_notice_component__WEBPACK_IMPORTED_MODULE_1__["default"], _objectSpread({}, notice)), children]
           })]
         })
       })
@@ -8813,7 +8850,6 @@ function deleteTodo(_ref) {
  */
 function updateTodo(todo) {
   var formData = new FormData();
-  console.log(todo);
 
   // append to form data
   Object.keys(todo).forEach(function (key) {
