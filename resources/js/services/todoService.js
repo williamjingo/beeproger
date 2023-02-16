@@ -1,3 +1,5 @@
+import { boolean } from "joi";
+
 const apiEndPoint = "/api/todos";
 
 /**
@@ -34,7 +36,37 @@ export function deleteTodo({ id }) {
  * @returns
  */
 export function updateTodo(todo) {
-    return axios.put(`${apiEndPoint}/${todo.id}`, { ...todo });
+    const formData = new FormData();
+
+    console.log(todo);
+
+    // append to form data
+    Object.keys(todo).forEach((key) => {
+        // if image is not change remove
+        if (key === "image") {
+            todo[key] = todo[key] instanceof File ? todo[key] : null;
+        }
+
+        if (todo[key] && key !== "is_complete") {
+            formData.append(key, todo[key]);
+        }
+
+        if (key === "is_complete") {
+            formData.append(key, Number(todo[key]));
+        }
+    });
+
+    // added PUT for api to handle this as a PUT request instead of a POST
+    formData.append("_method", "PUT");
+
+    // set axios multipart/form-data to support image upload
+    const config = {
+        headers: {
+            "content-type": "multipart/form-data",
+        },
+    };
+
+    return axios.post(`${apiEndPoint}/${todo.id}`, formData, config);
 }
 
 /**

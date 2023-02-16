@@ -7494,16 +7494,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _services_todoService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/todoService */ "./resources/js/services/todoService.js");
-/* harmony import */ var _services_validationServices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/validationServices */ "./resources/js/services/validationServices.js");
-/* harmony import */ var _components_button_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/button.component */ "./resources/js/components/button.component.jsx");
-/* harmony import */ var _components_default_layout_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/default-layout.component */ "./resources/js/components/default-layout.component.jsx");
-/* harmony import */ var _components_alerts_notice_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/alerts/notice.component */ "./resources/js/components/alerts/notice.component.jsx");
-/* harmony import */ var _components_form_text_input_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/form/text-input.component */ "./resources/js/components/form/text-input.component.jsx");
-/* harmony import */ var _components_form_textarea_input_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/form/textarea-input.component */ "./resources/js/components/form/textarea-input.component.jsx");
-/* harmony import */ var _components_form_file_input_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/form/file-input.component */ "./resources/js/components/form/file-input.component.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var joi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! joi */ "./node_modules/joi/dist/joi-browser.min.js");
+/* harmony import */ var joi__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(joi__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_todoService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/todoService */ "./resources/js/services/todoService.js");
+/* harmony import */ var _services_validationServices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/validationServices */ "./resources/js/services/validationServices.js");
+/* harmony import */ var _components_button_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/button.component */ "./resources/js/components/button.component.jsx");
+/* harmony import */ var _components_default_layout_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/default-layout.component */ "./resources/js/components/default-layout.component.jsx");
+/* harmony import */ var _components_alerts_notice_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/alerts/notice.component */ "./resources/js/components/alerts/notice.component.jsx");
+/* harmony import */ var _components_form_text_input_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/form/text-input.component */ "./resources/js/components/form/text-input.component.jsx");
+/* harmony import */ var _components_form_textarea_input_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/form/textarea-input.component */ "./resources/js/components/form/textarea-input.component.jsx");
+/* harmony import */ var _components_form_file_input_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/form/file-input.component */ "./resources/js/components/form/file-input.component.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -7532,8 +7534,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var renderPageTitle = function renderPageTitle() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
     children: "Update Todo"
   });
 };
@@ -7555,8 +7558,17 @@ var EditTodo = function EditTodo() {
     loading = _useState8[0],
     setLoading = _useState8[1];
 
+  // validation schema
+  var validate_schema = joi__WEBPACK_IMPORTED_MODULE_1___default().object({
+    id: joi__WEBPACK_IMPORTED_MODULE_1___default().number(),
+    is_complete: joi__WEBPACK_IMPORTED_MODULE_1___default().boolean(),
+    title: joi__WEBPACK_IMPORTED_MODULE_1___default().string().min(2).max(50).label("Title").required(),
+    description: joi__WEBPACK_IMPORTED_MODULE_1___default().string().max(255).label("Description"),
+    image: joi__WEBPACK_IMPORTED_MODULE_1___default().any().label("Image")
+  });
+
   // Navigation
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_10__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useParams)(),
     id = _useParams.id;
 
   // query server for todo
@@ -7567,7 +7579,7 @@ var EditTodo = function EditTodo() {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _services_todoService__WEBPACK_IMPORTED_MODULE_1__["default"].getTodo(id);
+            return _services_todoService__WEBPACK_IMPORTED_MODULE_2__["default"].getTodo(id);
           case 2:
             _yield$todoService$ge = _context.sent;
             data = _yield$todoService$ge.data;
@@ -7587,42 +7599,120 @@ var EditTodo = function EditTodo() {
   }, [id]);
   if (!todo) return;
 
-  // handle on change
-  var handOnInputChange = function handOnInputChange() {};
-  var handleOnSubmit = function handleOnSubmit() {};
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_default_layout_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  // handle form errors
+  var handOnInputChange = function handOnInputChange(_ref2) {
+    var target = _ref2.target,
+      _ref2$currentTarget = _ref2.currentTarget,
+      name = _ref2$currentTarget.name,
+      value = _ref2$currentTarget.value,
+      type = _ref2$currentTarget.type;
+    var data = _objectSpread({}, todo);
+
+    // update property
+    if (type === "file") {
+      data[name] = target.files[0];
+    } else {
+      data[name] = value;
+    }
+    var errorMessage = (0,_services_validationServices__WEBPACK_IMPORTED_MODULE_3__.validateProperty)({
+      name: name,
+      value: value,
+      validate_schema: validate_schema
+    });
+    var errors = _objectSpread({}, formErrors);
+    if (errorMessage) errors[name] = errorMessage;else delete errors[name];
+    setFormErrors(_objectSpread({}, errors));
+    setTodo(data);
+  };
+  var handleOnSubmit = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var errors, _yield$todoService$up, data, _error$response, status, _data, _errors;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            errors = (0,_services_validationServices__WEBPACK_IMPORTED_MODULE_3__.validate)(todo, validate_schema);
+            if (!(errors && Object.keys(errors).length > 0)) {
+              _context2.next = 5;
+              break;
+            }
+            setFormErrors(errors);
+            return _context2.abrupt("return");
+          case 5:
+            setLoading(true);
+            _context2.next = 8;
+            return _services_todoService__WEBPACK_IMPORTED_MODULE_2__["default"].updateTodo(todo);
+          case 8:
+            _yield$todoService$up = _context2.sent;
+            data = _yield$todoService$up.data;
+            setTodo(_objectSpread({}, data.data));
+            setNotice({
+              type: "success",
+              message: "Todo Updated Successfully"
+            });
+            setLoading(false);
+            _context2.next = 24;
+            break;
+          case 15:
+            _context2.prev = 15;
+            _context2.t0 = _context2["catch"](0);
+            setLoading(false);
+            _error$response = _context2.t0.response, status = _error$response.status, _data = _error$response.data;
+            if (!(status !== 422)) {
+              _context2.next = 22;
+              break;
+            }
+            setNotice({
+              type: "danger",
+              message: "Oops! we are having trouble updating your Todo, Please try again later"
+            });
+            return _context2.abrupt("return");
+          case 22:
+            _errors = _data.errors;
+            setFormErrors(_errors);
+          case 24:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 15]]);
+    }));
+    return function handleOnSubmit() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_default_layout_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     title: renderPageTitle(),
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
-      children: [notice && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_alerts_notice_component__WEBPACK_IMPORTED_MODULE_5__["default"], _objectSpread({}, notice)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+      children: [notice && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_alerts_notice_component__WEBPACK_IMPORTED_MODULE_6__["default"], _objectSpread({}, notice)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
         className: "mb-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_form_text_input_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_form_text_input_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
           name: "title",
           value: todo.title,
           error: formErrors.title,
           onChange: handOnInputChange
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
         className: "mb-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_form_textarea_input_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_form_textarea_input_component__WEBPACK_IMPORTED_MODULE_8__["default"], {
           name: "description",
           value: todo.description,
           error: formErrors.description,
           onChange: handOnInputChange
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
         className: "mb-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_form_file_input_component__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_form_file_input_component__WEBPACK_IMPORTED_MODULE_9__["default"], {
           name: "image",
           imageObj: todo.image,
           error: formErrors.image,
           onChange: handOnInputChange
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
         className: "btn-group",
         role: "group",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
           type: "back"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
           type: "submit",
           label: "Update Todo",
           onSubmit: handleOnSubmit,
@@ -8094,12 +8184,11 @@ __webpack_require__.r(__webpack_exports__);
 var Notice = function Notice(_ref) {
   var type = _ref.type,
     message = _ref.message;
-  if (type === "success") return renderSuccessfullNotice(message);
-  return null;
-};
-var renderSuccessfullNotice = function renderSuccessfullNotice(message) {
+  var noticeTypes = ["success", "danger"];
+  if (!noticeTypes.includes(type)) return null;
+  var noticeClassName = "alert alert-".concat(type, " alert-dismissible fade show");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "alert alert-success alert-dismissible fade show",
+    className: noticeClassName,
     role: "alert",
     children: [message, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
       type: "button",
@@ -8682,12 +8771,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "storeTodo": () => (/* binding */ storeTodo),
 /* harmony export */   "updateTodo": () => (/* binding */ updateTodo)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+/* harmony import */ var joi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! joi */ "./node_modules/joi/dist/joi-browser.min.js");
+/* harmony import */ var joi__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(joi__WEBPACK_IMPORTED_MODULE_0__);
+
 var apiEndPoint = "/api/todos";
 
 /**
@@ -8726,7 +8812,33 @@ function deleteTodo(_ref) {
  * @returns
  */
 function updateTodo(todo) {
-  return axios.put("".concat(apiEndPoint, "/").concat(todo.id), _objectSpread({}, todo));
+  var formData = new FormData();
+  console.log(todo);
+
+  // append to form data
+  Object.keys(todo).forEach(function (key) {
+    // if image is not change remove
+    if (key === "image") {
+      todo[key] = todo[key] instanceof File ? todo[key] : null;
+    }
+    if (todo[key] && key !== "is_complete") {
+      formData.append(key, todo[key]);
+    }
+    if (key === "is_complete") {
+      formData.append(key, Number(todo[key]));
+    }
+  });
+
+  // added PUT for api to handle this as a PUT request instead of a POST
+  formData.append("_method", "PUT");
+
+  // set axios multipart/form-data to support image upload
+  var config = {
+    headers: {
+      "content-type": "multipart/form-data"
+    }
+  };
+  return axios.post("".concat(apiEndPoint, "/").concat(todo.id), formData, config);
 }
 
 /**
@@ -8769,6 +8881,7 @@ function storeTodo(todo) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "validate": () => (/* binding */ validate),
 /* harmony export */   "validateProperty": () => (/* binding */ validateProperty)
 /* harmony export */ });
 /* harmony import */ var joi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! joi */ "./node_modules/joi/dist/joi-browser.min.js");
@@ -8795,7 +8908,7 @@ function validateProperty(_ref) {
 }
 
 // form validation
-var validate = function validate(data, schema) {
+function validate(data, schema) {
   var options = {
     abortEarly: false
   };
@@ -8816,7 +8929,7 @@ var validate = function validate(data, schema) {
     _iterator.f();
   }
   return errors;
-};
+}
 
 /***/ }),
 

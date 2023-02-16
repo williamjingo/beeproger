@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Joi from "joi";
 
 import todoService from "../../services/todoService";
 import { validateProperty, validate } from "../../services/validationServices";
@@ -22,6 +23,15 @@ const EditTodo = () => {
 
     const [loading, setLoading] = useState(false);
 
+    // validation schema
+    const validate_schema = Joi.object({
+        id: Joi.number(),
+        is_complete: Joi.boolean(),
+        title: Joi.string().min(2).max(50).label("Title").required(),
+        description: Joi.string().max(255).label("Description"),
+        image: Joi.any().label("Image"),
+    });
+
     // Navigation
     const { id } = useParams();
 
@@ -37,10 +47,69 @@ const EditTodo = () => {
 
     if (!todo) return;
 
-    // handle on change
-    const handOnInputChange = () => {};
+    // handle form errors
+    const handOnInputChange = ({
+        target,
+        currentTarget: { name, value, type },
+    }) => {
+        const data = { ...todo };
 
-    const handleOnSubmit = () => {};
+        // update property
+        if (type === "file") {
+            data[name] = target.files[0];
+        } else {
+            data[name] = value;
+        }
+
+        const errorMessage = validateProperty({ name, value, validate_schema });
+        const errors = { ...formErrors };
+        if (errorMessage) errors[name] = errorMessage;
+        else delete errors[name];
+
+        setFormErrors({ ...errors });
+        setTodo(data);
+    };
+
+    const handleOnSubmit = async () => {
+        try {
+            const errors = validate(todo, validate_schema);
+
+            if (errors && Object.keys(errors).length > 0) {
+                setFormErrors(errors);
+                return;
+            }
+
+            setLoading(true);
+
+            const { data } = await todoService.updateTodo(todo);
+
+            setTodo({ ...data.data });
+
+            setNotice({
+                type: "success",
+                message: "Todo Updated Successfully",
+            });
+
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+
+            const { status, data } = error.response;
+
+            if (status !== 422) {
+                setNotice({
+                    type: "danger",
+                    message:
+                        "Oops! we are having trouble updating your Todo, Please try again later",
+                });
+
+                return;
+            }
+
+            const { errors } = data;
+            setFormErrors(errors);
+        }
+    };
 
     return (
         <DefaultLayout title={renderPageTitle()}>

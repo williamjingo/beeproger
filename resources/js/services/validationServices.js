@@ -10,7 +10,7 @@ export function validateProperty({ name, value, validate_schema }) {
 }
 
 // form validation
-const validate = (data, schema) => {
+export function validate(data, schema) {
     const options = { abortEarly: false };
     const { error } = schema.validate(data, options);
     if (!error) return null;
@@ -18,4 +18,4 @@ const validate = (data, schema) => {
     const errors = {};
     for (let item of error.details) errors[item.path[0]] = item.message;
     return errors;
-};
+}

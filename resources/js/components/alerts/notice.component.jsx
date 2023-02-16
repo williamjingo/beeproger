@@ -1,16 +1,14 @@
 import React from "react";
 
 const Notice = ({ type, message }) => {
-    if (type === "success") return renderSuccessfullNotice(message);
-    return null;
-};
+    const noticeTypes = ["success", "danger"];
 
-const renderSuccessfullNotice = (message) => {
+    if (!noticeTypes.includes(type)) return null;
+
+    const noticeClassName = `alert alert-${type} alert-dismissible fade show`;
+
     return (
-        <div
-            className="alert alert-success alert-dismissible fade show"
-            role="alert"
-        >
+        <div className={noticeClassName} role="alert">
             {message}
             <button
                 type="button"
