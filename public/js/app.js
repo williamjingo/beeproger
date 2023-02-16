@@ -7451,8 +7451,9 @@ var CreateTodo = function CreateTodo() {
   }();
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_default_layout_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     title: renderPageTitle(),
+    notice: notice || null,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
-      children: [notice && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_alerts_notice_component__WEBPACK_IMPORTED_MODULE_6__["default"], _objectSpread({}, notice)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
         className: "mb-3",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_form_text_input_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
           name: "title",
@@ -7822,7 +7823,7 @@ var ShowTodo = function ShowTodo() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "card-body",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-          "class": "card-title",
+          className: "card-title",
           children: title
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           className: "card-text",

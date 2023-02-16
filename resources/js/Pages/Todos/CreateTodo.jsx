@@ -101,10 +101,8 @@ const CreateTodo = () => {
     };
 
     return (
-        <DefaultLayout title={renderPageTitle()}>
+        <DefaultLayout title={renderPageTitle()} notice={notice || null}>
             <>
-                {notice && <Notice {...notice} />}
-
                 <div className="mb-3">
                     <TextInput
                         name="title"
