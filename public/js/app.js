@@ -7898,16 +7898,12 @@ var renderPageTitle = function renderPageTitle() {
 var TodoIndex = function TodoIndex() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
-    todos = _useState2[0],
-    setTodos = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    data = _useState2[0],
+    setData = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState4 = _slicedToArray(_useState3, 2),
-    paginationObj = _useState4[0],
-    setPaginationObj = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    _useState6 = _slicedToArray(_useState5, 2),
-    notice = _useState6[0],
-    setNotice = _useState6[1];
+    notice = _useState4[0],
+    setNotice = _useState4[1];
 
   /**
    * Function retrieves to
@@ -7927,9 +7923,8 @@ var TodoIndex = function TodoIndex() {
           case 3:
             _yield$todoService$ge = _context.sent;
             data = _yield$todoService$ge.data;
-            setTodos(data.data);
-            setPaginationObj(data);
-          case 7:
+            setData(data);
+          case 6:
           case "end":
             return _context.stop();
         }
@@ -7979,22 +7974,27 @@ var TodoIndex = function TodoIndex() {
             return _services_todoService__WEBPACK_IMPORTED_MODULE_1__["default"].deleteTodo(todo);
           case 3:
             // filter deleted todo from state
-            setTodos(function (current) {
-              return current.filter(function (obj) {
-                if (obj.id != todo.id) return obj;
+            setData(function (current) {
+              return _objectSpread(_objectSpread({}, current), {}, {
+                data: current.data.filter(function (obj) {
+                  if (obj.id != todo.id) return obj;
+                })
               });
             });
-            _context3.next = 9;
+
+            // update table
+            getTodos();
+            _context3.next = 10;
             break;
-          case 6:
-            _context3.prev = 6;
+          case 7:
+            _context3.prev = 7;
             _context3.t0 = _context3["catch"](0);
             handleError(_context3.t0);
-          case 9:
+          case 10:
           case "end":
             return _context3.stop();
         }
-      }, _callee3, null, [[0, 6]]);
+      }, _callee3, null, [[0, 7]]);
     }));
     return function handleOnDelete(_x3) {
       return _ref3.apply(this, arguments);
@@ -8014,10 +8014,12 @@ var TodoIndex = function TodoIndex() {
             return _services_todoService__WEBPACK_IMPORTED_MODULE_1__["default"].updateTodo(updatedTodo);
           case 4:
             // update state
-            setTodos(function (current) {
-              return current.map(function (obj) {
-                if (obj.id === todo.id) return updatedTodo;
-                return obj;
+            setData(function (current) {
+              return _objectSpread(_objectSpread({}, current), {}, {
+                data: current.data.map(function (obj) {
+                  if (obj.id === todo.id) return updatedTodo;
+                  return obj;
+                })
               });
             });
             _context4.next = 10;
@@ -8047,6 +8049,7 @@ var TodoIndex = function TodoIndex() {
       return;
     }
   };
+  var todos = data.data;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_default_layout_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     title: renderPageTitle(),
     notice: notice || null,
@@ -8061,7 +8064,7 @@ var TodoIndex = function TodoIndex() {
           }, todo.id);
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_pagination_pagination_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        data: paginationObj,
+        data: data,
         onPageChange: handlePageChange
       })]
     })

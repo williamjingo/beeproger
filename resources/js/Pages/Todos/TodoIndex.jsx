@@ -20,8 +20,7 @@ const renderPageTitle = () => {
 };
 
 const TodoIndex = () => {
-    const [todos, setTodos] = useState([]);
-    const [paginationObj, setPaginationObj] = useState({});
+    const [data, setData] = useState([]);
     const [notice, setNotice] = useState(null);
 
     /**
@@ -29,8 +28,7 @@ const TodoIndex = () => {
      */
     const getTodos = async (page = null) => {
         const { data } = await todoService.getTodos(page);
-        setTodos(data.data);
-        setPaginationObj(data);
+        setData(data);
     };
 
     /**
@@ -55,11 +53,17 @@ const TodoIndex = () => {
             await todoService.deleteTodo(todo);
 
             // filter deleted todo from state
-            setTodos((current) =>
-                current.filter((obj) => {
-                    if (obj.id != todo.id) return obj;
-                })
-            );
+            setData((current) => {
+                return {
+                    ...current,
+                    data: current.data.filter((obj) => {
+                        if (obj.id != todo.id) return obj;
+                    }),
+                };
+            });
+
+            // update table
+            getTodos();
         } catch (error) {
             handleError(error);
         }
@@ -72,13 +76,16 @@ const TodoIndex = () => {
             await todoService.updateTodo(updatedTodo);
 
             // update state
-            setTodos((current) =>
-                current.map((obj) => {
-                    if (obj.id === todo.id) return updatedTodo;
+            setData((current) => {
+                return {
+                    ...current,
+                    data: current.data.map((obj) => {
+                        if (obj.id === todo.id) return updatedTodo;
 
-                    return obj;
-                })
-            );
+                        return obj;
+                    }),
+                };
+            });
         } catch (error) {
             handleError(error);
         }
@@ -98,6 +105,8 @@ const TodoIndex = () => {
         }
     };
 
+    const { data: todos } = data;
+
     return (
         <DefaultLayout title={renderPageTitle()} notice={notice || null}>
             <>
@@ -113,10 +122,7 @@ const TodoIndex = () => {
                         ))}
                 </ul>
 
-                <Pagination
-                    data={paginationObj}
-                    onPageChange={handlePageChange}
-                />
+                <Pagination data={data} onPageChange={handlePageChange} />
             </>
         </DefaultLayout>
     );
