@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->string("title", 50)->unique();
+            $table->string("title", 50);
             $table->string("description", 255)->nullable();
             $table->boolean("is_complete")->default(false);
             $table->text("image_path")->nullable();
