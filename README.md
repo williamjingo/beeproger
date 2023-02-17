@@ -12,11 +12,11 @@ To-do list consisting of Laravel backend and frontend reactjs.
 * Mark an item as complete
 * Remove an item from the list
 
-### Setup
-This project can be run with or without docker running on the intended machine
+### Setup ( Docker )
+Make sure docker engine is running on your machine.
 
-### Usage
-run application ```./vendor/bin/sail up -d```
+1. Start the project with ```./vendor/bin/sail up -d```
+2. Seed the database with ```sail artisan migrate --seed```
 
 
 
