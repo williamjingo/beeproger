@@ -8800,6 +8800,8 @@ var TodoItem = function TodoItem(_ref) {
     is_complete = todo.is_complete;
   var edit_path = "/edit-todo/".concat(id);
   var show_path = "/show-todo/".concat(id);
+  var todo_label_style = "form-check-label flex-grow-1";
+  if (is_complete) todo_label_style += " completed_todo";
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
     className: "list-group-item d-flex",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
@@ -8811,7 +8813,7 @@ var TodoItem = function TodoItem(_ref) {
         return onComplete(todo);
       }
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-      className: "form-check-label flex-grow-1",
+      className: todo_label_style,
       children: title
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
       to: edit_path,

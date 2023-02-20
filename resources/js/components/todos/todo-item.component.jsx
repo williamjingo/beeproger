@@ -7,6 +7,10 @@ const TodoItem = ({ todo, onDelete, onComplete }) => {
     const edit_path = `/edit-todo/${id}`;
     const show_path = `/show-todo/${id}`;
 
+    let todo_label_style = "form-check-label flex-grow-1";
+
+    if (is_complete) todo_label_style += " completed_todo";
+
     return (
         <li className="list-group-item d-flex">
             <input
@@ -16,7 +20,7 @@ const TodoItem = ({ todo, onDelete, onComplete }) => {
                 checked={is_complete}
                 onChange={() => onComplete(todo)}
             />
-            <label className="form-check-label flex-grow-1">{title}</label>
+            <label className={todo_label_style}>{title}</label>
 
             <Link to={edit_path} className="btn btn-primary btn-sm me-1">
                 <i className="bi bi-pencil-square" />

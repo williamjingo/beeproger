@@ -18823,3 +18823,7 @@ textarea.form-control-lg {
 .bi-wikipedia::before {
   content: "\f8cc";
 }
+
+.completed_todo {
+  text-decoration: line-through;
+}

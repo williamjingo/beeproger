@@ -47,7 +47,7 @@ cp .env.example .env
 Run project using
 
 ```
-/vendor/bin/sail up -d
+./vendor/bin/sail up -d
 ```
 
 Configure a shell alias that allows you to execute Sail's commands more easily
