@@ -57,7 +57,7 @@ class TodoRepository
             $data = Arr::except([...$data, ...$file_chars], ['image']);
 
             // drop image at path if exists
-            $imageService->drop_file($todo->image_path);
+            if ($todo->image_path) $imageService->drop_file($todo->image_path);
         }
 
         return tap($todo)->update($data);

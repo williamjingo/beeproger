@@ -7912,23 +7912,30 @@ var TodoIndex = function TodoIndex() {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var page,
         _yield$todoService$ge,
-        data,
+        _data,
         _args = arguments;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            page = _args.length > 0 && _args[0] !== undefined ? _args[0] : null;
-            _context.next = 3;
+            page = _args.length > 0 && _args[0] !== undefined ? _args[0] : 1;
+            _context.prev = 1;
+            _context.next = 4;
             return _services_todoService__WEBPACK_IMPORTED_MODULE_1__["default"].getTodos(page);
-          case 3:
+          case 4:
             _yield$todoService$ge = _context.sent;
-            data = _yield$todoService$ge.data;
-            setData(data);
-          case 6:
+            _data = _yield$todoService$ge.data;
+            setData(_data);
+            _context.next = 12;
+            break;
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](1);
+            handleError(_context.t0);
+          case 12:
           case "end":
             return _context.stop();
         }
-      }, _callee);
+      }, _callee, null, [[1, 9]]);
     }));
     return function getTodos() {
       return _ref.apply(this, arguments);

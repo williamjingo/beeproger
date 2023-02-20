@@ -26,9 +26,13 @@ const TodoIndex = () => {
     /**
      * Function retrieves to
      */
-    const getTodos = async (page = null) => {
-        const { data } = await todoService.getTodos(page);
-        setData(data);
+    const getTodos = async (page = 1) => {
+        try {
+            const { data } = await todoService.getTodos(page);
+            setData(data);
+        } catch (error) {
+            handleError(error);
+        }
     };
 
     /**
