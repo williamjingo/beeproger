@@ -23,11 +23,11 @@ Clone the git repository using the command below.
 git clone git@github.com:williamjingo/beeproger.git
 ```
 
-The next steps assume that you running this project using docker, However you can still run this projecting without using docker following the [laravel docs](https://laravel.com/docs/9.x/installation)
+The next steps assume that you running this project using docker, However you can still run this project without using docker following the [laravel docs](https://laravel.com/docs/9.x/installation)
 
 Make sures docker engine is running on your machine.
 
-Navingated to the newly created folder `beeproger` and install project dependencies by executing the command below.
+Navingate to the newly created folder `beeproger` and install project dependencies by executing the command below.
 
 ```
 docker run --rm \
