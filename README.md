@@ -27,7 +27,7 @@ The next steps assume that you running this project using docker, However you ca
 
 Make sures docker engine is running on your machine.
 
-Navingate to the newly created folder `beeproger` and install project dependencies by executing the command below.
+Navigate to the newly created folder `beeproger` and install project dependencies by executing the command below.
 
 ```
 docker run --rm \
