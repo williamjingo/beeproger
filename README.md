@@ -19,7 +19,9 @@ Make sure docker engine is running on your machine.
 
 Clone the git repository using the command below.
 
-> git clone git@github.com:williamjingo/beeproger.git
+```
+git clone git@github.com:williamjingo/beeproger.git
+```
 
 The next steps assume that you running this project using docker, However you can still run this projecting without using docker following the [laravel docs](https://laravel.com/docs/9.x/installation)
 
@@ -38,31 +40,45 @@ docker run --rm \
 
 Create the .env file using the command below
 
-> cp .env.example .env
+```
+cp .env.example .env
+```
 
 Run project using
 
-> /vendor/bin/sail up -d
+```
+/vendor/bin/sail up -d
+```
 
 Configure a shell alias that allows you to execute Sail's commands more easily
 
-> alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+```
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+```
 
 Generate application key using
 
-> sail artisan key:generate
+```
+sail artisan key:generate
+```
 
 To make files in the `storage/app/public` accessible to the web. create a symbolic link using the command below
 
-> sail artisan storage:link
+```
+sail artisan storage:link
+```
 
 For sample Todos seed the database with command below
 
-> sail artisan migrate --seed
+```
+sail artisan migrate --seed
+```
 
 Run the command below to stop the application docker containers
 
-> sail down
+```
+sail down
+```
 
 ### Author
 
